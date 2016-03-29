@@ -10,7 +10,7 @@ var Profile = React.createClass({
     mixins: [ReactFireMixin],
     getInitialState: function(){
       return {
-          notes: ["note 1", "note 2"],
+          notes: [],
           bio: {
               name: "Ignacio Prado"
           },
@@ -18,12 +18,12 @@ var Profile = React.createClass({
       };
     },
     componentDidMount: function(){
-        //this.ref = new Firebase('https://gg-github-notes.firebaseio.com/');
-        //var childRef = this.ref.child(this.props.params.username)
-        //this.bindAsArray(childRef, 'notes');
+        var username = this.props.params.username;
+        var notes = new Firebase('https://gg-github-notes.firebaseio.com/' + username);
+        this.bindAsArray(notes, 'notes');
     },
-    componentWillMount: function(){
-        ///this.unbind('notes');
+    componentWillUnMount: function(){
+        this.unbind('notes');
     },
     handleAddNote: function(newNote){
         //update firebase with new note;
