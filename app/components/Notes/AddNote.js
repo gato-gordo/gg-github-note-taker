@@ -22,14 +22,14 @@ var AddNote = React.createClass({
                     placeholder="Add New Note"
                     ref={this.setRef}
             />
-        <span className="input-group-bt">
-            <button
-                className="btn btn-default"
-                type="button"
-                onClick={this.handleSubmit}
-            >
-                Submit
-            </button>
+            <span className="input-group-btn">
+                <button
+                    className="btn btn-default"
+                    type="button"
+                    onClick={this.handleSubmit}
+                >
+                    Submit
+                </button>
             </span>
         </div>
      );

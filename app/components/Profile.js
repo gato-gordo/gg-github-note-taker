@@ -19,17 +19,16 @@ var Profile = React.createClass({
     },
     componentDidMount: function(){
         var username = this.props.params.username;
-        var notes = new Firebase('https://gg-github-notes.firebaseio.com/' + username);
-        this.bindAsArray(notes, 'notes');
+        this.ref = new Firebase('https://gg-github-notes.firebaseio.com/');
+        var childRef = this.ref.child(username)
+        this.bindAsArray(childRef, 'notes');
     },
     componentWillUnMount: function(){
         this.unbind('notes');
     },
     handleAddNote: function(newNote){
-        //update firebase with new note;
-        this.setState({
-            notes: this.state.notes.concat([newNote])
-        });
+        var username = this.props.params.username;
+        this.ref.child(username).child(this.state.notes.length).set(newNote);
     },
     render: function(){
         return (
