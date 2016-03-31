@@ -9,7 +9,7 @@ var Repos = React.createClass({
        return (
            <div>
                <p>Repos</p>
-               <p>{this.props.repos}</p>
+               <p>{}</p>
            </div>
        )
    }

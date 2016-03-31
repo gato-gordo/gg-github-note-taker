@@ -5,16 +5,15 @@ var UserProfile = require('./Github/UserProfile');
 var Notes = require('./Notes/Notes');
 var ReactFireMixin = require('reactfire');
 var Firebase = require('firebase');
+var helpers = require('../utils/helpers');
 
 var Profile = React.createClass({
     mixins: [ReactFireMixin],
     getInitialState: function(){
       return {
           notes: [],
-          bio: {
-              name: "Ignacio Prado"
-          },
-          repos: ['repo 1', 'repo 2']
+          bio: {},
+          repos: []
       };
     },
     componentDidMount: function(){
@@ -22,6 +21,13 @@ var Profile = React.createClass({
         this.ref = new Firebase('https://gg-github-notes.firebaseio.com/');
         var childRef = this.ref.child(username)
         this.bindAsArray(childRef, 'notes');
+        helpers.getGithubInfo(this.props.params.username)
+            .then(function(data){
+                this.setState({
+                    bio: data.bio,
+                    repos: data.repos
+                })
+            }.bind(this))
     },
     componentWillUnMount: function(){
         this.unbind('notes');

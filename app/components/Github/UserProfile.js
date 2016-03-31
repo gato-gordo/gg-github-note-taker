@@ -10,7 +10,7 @@ var UserProfile = React.createClass({
             <div>
                 <p>User Profil!</p>
                 <p>Username: {this.props.username}</p>
-                <p> Bio: {this.props.bio.name} </p>
+                <p> </p>
                 <p></p>
             </div>
         )
