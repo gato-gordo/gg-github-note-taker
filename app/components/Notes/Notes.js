@@ -11,7 +11,7 @@ var Notes = React.createClass({
     render: function(){
         return (
             <div>
-                <h3>Notes for {this.props.username}</h3>
+                <h2>Notes for {this.props.username}</h2>
                 <AddNote
                     addNote={this.props.addNote}
                     username={this.props.username}
