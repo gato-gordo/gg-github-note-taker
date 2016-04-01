@@ -1,16 +1,20 @@
-var React = require('react');
+import React, { Component } from 'react';
 
-var NotesList = React.createClass({
-    render: function(){
-        var notes = this.props.notes.map(function(note, index){
-           return <li className="list-group-item" key={index}>{note}</li>
-        });
+class NotesList extends Component {
+    render(){
+        const notes = this.props.notes;
         return (
             <ul className="list-group">
-                {notes}
+                {
+                    notes
+                        .map(
+                            (note, index) =>
+                                <li className="list-group-item" key={index}>{note}</li>
+                        )
+                }
             </ul>
         );
     }
-});
+}
 
-module.exports = NotesList;
+export default NotesList;
