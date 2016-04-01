@@ -1,11 +1,7 @@
-var React = require('react');
+import React, { Component } from 'react';
 
-var UserProfile = React.createClass({
-    propTypes: {
-        username: React.PropTypes.string.isRequired,
-        bio: React.PropTypes.object.isRequired
-    },
-    render: function(){
+class UserProfile  extends Component {
+    render(){
         var bio = this.props.bio;
         var bioListItems = Object.keys(bio)
             .filter(bioKey => bio[bioKey])
@@ -20,7 +16,12 @@ var UserProfile = React.createClass({
                 </div>
             );
     }
-});
+}
+
+UserProfile.propTypes = {
+    username: React.PropTypes.string.isRequired,
+    bio: React.PropTypes.object.isRequired
+};
 
 var keyToLabel = function(key){
     return  key
@@ -28,6 +29,6 @@ var keyToLabel = function(key){
                 .split(' ')
                 .map(word => word[0].toUpperCase() + word.slice(1))
                 .join(' ');
-}
+};
 
-module.exports = UserProfile;
+export default UserProfile;
