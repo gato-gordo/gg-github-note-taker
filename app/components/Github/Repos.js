@@ -1,8 +1,6 @@
 import React from 'react';
 
-class Repos extends React.Component {
-   render(){
-       const repos = this.props.repos;
+const Repos = ( {repos } ) => {
 
        return (
            <div>
@@ -18,9 +16,8 @@ class Repos extends React.Component {
                  }
                </ul>
            </div>
-       )
-   }
-};
+       );
+}
 
 Repos.propTypes = {
     username: React.PropTypes.string.isRequired,
