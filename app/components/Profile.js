@@ -17,11 +17,20 @@ var Profile = React.createClass({
       };
     },
     componentDidMount: function(){
-        var username = this.props.params.username;
         this.ref = new Firebase('https://gg-github-notes.firebaseio.com/');
+        var username = this.props.params.username;
+        this.init(username);
+    },
+    unbindNotes: function(){
+        this.unbind('notes');
+    },
+    componentWillUnMount: function(){
+        this.unbindNotes();
+    },
+    init: function(username){
         var childRef = this.ref.child(username)
         this.bindAsArray(childRef, 'notes');
-        helpers.getGithubInfo(this.props.params.username)
+        helpers.getGithubInfo(username)
             .then(function(data){
                 this.setState({
                     bio: data.bio,
@@ -29,8 +38,10 @@ var Profile = React.createClass({
                 })
             }.bind(this))
     },
-    componentWillUnMount: function(){
-        this.unbind('notes');
+    componentWillReceiveProps: function(nextProps){
+        var username = nextProps.params.username;
+        this.unbindNotes();
+        this.init(username);
     },
     handleAddNote: function(newNote){
         var username = this.props.params.username;
